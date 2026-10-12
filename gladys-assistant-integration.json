@@ -1,0 +1,297 @@
+{
+  "manifest_version": 1,
+  "type": "device",
+  "name": "Wemo",
+  "description": {
+    "en": "Control Belkin Wemo plugs, switches, dimmers and motion sensors on your local network.",
+    "fr": "Pilotez prises, interrupteurs, variateurs et détecteurs Belkin Wemo en réseau local."
+  },
+  "version": "1.0.0",
+  "docker_image": "ghcr.io/prohand/gladys-wemo:1.0.0",
+  "gladys_version": ">=5.1.0",
+  "cover_image": "https://raw.githubusercontent.com/prohand/gladys-wemo/main/cover.png",
+  "categories": ["lighting", "energy", "appliances"],
+  "transports": ["local"],
+  "network_discovery": [{ "type": "ssdp", "st": "urn:Belkin:service:basicevent:1" }],
+  "config_schema": [
+    {
+      "key": "intro",
+      "type": "section",
+      "label": { "en": "Getting started", "fr": "Pour commencer" },
+      "description": {
+        "en": "Wemo devices are controlled on your local network, without any account: the Belkin cloud is no longer needed (it closed in January 2026). Open the Discovery tab to find them, then add the ones you want. A Wemo that is not found automatically can be typed below by its IP address.",
+        "fr": "Les Wemo sont pilotés sur votre réseau local, sans aucun compte : le cloud Belkin n'est plus nécessaire (il a fermé en janvier 2026). Ouvrez l'onglet Découverte pour les trouver, puis ajoutez ceux que vous voulez. Un Wemo qui n'est pas trouvé automatiquement peut être saisi ci-dessous par son adresse IP."
+      },
+      "links": [
+        {
+          "url": "https://github.com/prohand/gladys-wemo/blob/main/docs/en.md",
+          "label": { "en": "Integration documentation", "fr": "Documentation de l'intégration" }
+        }
+      ]
+    },
+    {
+      "key": "hosts",
+      "type": "string",
+      "label": { "en": "Wemo addresses", "fr": "Adresses des Wemo" },
+      "description": {
+        "en": "Optional. IP addresses of Wemo devices the automatic search does not find (another VLAN, mesh Wi-Fi), separated by commas. A port can be added: 192.168.1.20:49153.",
+        "fr": "Facultatif. Adresses IP des Wemo que la recherche automatique ne trouve pas (autre VLAN, Wi-Fi maillé), séparées par des virgules. Un port peut être ajouté : 192.168.1.20:49153."
+      },
+      "placeholder": {
+        "en": "e.g. 192.168.1.20, 192.168.1.21",
+        "fr": "ex. 192.168.1.20, 192.168.1.21"
+      },
+      "required": false
+    },
+    {
+      "key": "poll_interval",
+      "type": "number",
+      "label": { "en": "Refresh interval (s)", "fr": "Intervalle de rafraîchissement (s)" },
+      "description": {
+        "en": "How often plugs, switches and dimmers are read, in seconds. A change made from the Wemo button or app shows in Gladys within this delay.",
+        "fr": "Fréquence de lecture des prises, interrupteurs et variateurs, en secondes. Un changement fait depuis le bouton du Wemo ou son application apparaît dans Gladys dans ce délai."
+      },
+      "required": false,
+      "default": 10,
+      "min": 5,
+      "max": 300
+    },
+    {
+      "key": "motion_poll_interval",
+      "type": "number",
+      "label": { "en": "Motion sensor interval (s)", "fr": "Intervalle des détecteurs (s)" },
+      "description": {
+        "en": "How often motion sensors are read, in seconds: the delay before a scene starts on a motion.",
+        "fr": "Fréquence de lecture des détecteurs de mouvement, en secondes : le délai avant qu'une scène démarre sur un mouvement."
+      },
+      "required": false,
+      "default": 2,
+      "min": 1,
+      "max": 30
+    },
+    {
+      "key": "auto_rediscover",
+      "type": "boolean",
+      "label": {
+        "en": "Find a silent Wemo again",
+        "fr": "Retrouver un Wemo silencieux"
+      },
+      "description": {
+        "en": "When a Wemo stops answering, search the network for it (it may have a new IP address). At most once every five minutes.",
+        "fr": "Quand un Wemo ne répond plus, le rechercher sur le réseau (il a pu changer d'adresse IP). Au plus une fois toutes les cinq minutes."
+      },
+      "required": false,
+      "default": true
+    }
+  ],
+  "actions": [
+    {
+      "key": "scan",
+      "label": { "en": "Search for Wemo devices", "fr": "Rechercher les Wemo" },
+      "timeout_seconds": 45
+    },
+    {
+      "key": "test_connection",
+      "label": { "en": "Test the connection", "fr": "Tester la connexion" },
+      "timeout_seconds": 60
+    }
+  ],
+  "scene_triggers": [
+    {
+      "key": "motion_detected",
+      "label": { "en": "Wemo motion detected", "fr": "Mouvement détecté (Wemo)" },
+      "description": {
+        "en": "A Wemo Motion sensor saw a movement.",
+        "fr": "Un détecteur Wemo Motion a vu un mouvement."
+      },
+      "fields": [
+        {
+          "key": "device",
+          "type": "select",
+          "source": "devices",
+          "label": { "en": "Sensor", "fr": "Détecteur" }
+        }
+      ],
+      "variables": [
+        {
+          "key": "device_name",
+          "type": "string",
+          "label": { "en": "Sensor name", "fr": "Nom du détecteur" }
+        }
+      ]
+    },
+    {
+      "key": "insight_state_changed",
+      "label": { "en": "Wemo Insight state changed", "fr": "État d'un Wemo Insight changé" },
+      "description": {
+        "en": "An Insight switched on, went to standby (the appliance finished) or switched off.",
+        "fr": "Un Insight s'est allumé, est passé en veille (l'appareil a fini) ou s'est éteint."
+      },
+      "fields": [
+        {
+          "key": "device",
+          "type": "select",
+          "source": "devices",
+          "label": { "en": "Insight", "fr": "Insight" }
+        },
+        {
+          "key": "state",
+          "type": "multi_select",
+          "label": { "en": "New state", "fr": "Nouvel état" },
+          "options": [
+            { "value": "on", "label": { "en": "On (running)", "fr": "Allumé (en marche)" } },
+            {
+              "value": "standby",
+              "label": { "en": "Standby (finished)", "fr": "En veille (terminé)" }
+            },
+            { "value": "off", "label": { "en": "Off", "fr": "Éteint" } }
+          ]
+        }
+      ],
+      "variables": [
+        {
+          "key": "device_name",
+          "type": "string",
+          "label": { "en": "Insight name", "fr": "Nom de l'Insight" }
+        },
+        { "key": "state", "type": "string", "label": { "en": "New state", "fr": "Nouvel état" } },
+        { "key": "power", "type": "number", "label": { "en": "Power (W)", "fr": "Puissance (W)" } }
+      ]
+    },
+    {
+      "key": "connection_changed",
+      "label": { "en": "Wemo reachable or not", "fr": "Wemo joignable ou non" },
+      "description": {
+        "en": "A Wemo stopped answering on the network, or answers again.",
+        "fr": "Un Wemo ne répond plus sur le réseau, ou répond à nouveau."
+      },
+      "fields": [
+        {
+          "key": "device",
+          "type": "select",
+          "source": "devices",
+          "label": { "en": "Device", "fr": "Appareil" }
+        },
+        {
+          "key": "status",
+          "type": "multi_select",
+          "label": { "en": "Status", "fr": "Statut" },
+          "options": [
+            { "value": "offline", "label": { "en": "Unreachable", "fr": "Injoignable" } },
+            { "value": "online", "label": { "en": "Back online", "fr": "De nouveau joignable" } }
+          ]
+        }
+      ],
+      "variables": [
+        {
+          "key": "device_name",
+          "type": "string",
+          "label": { "en": "Device name", "fr": "Nom de l'appareil" }
+        },
+        { "key": "status", "type": "string", "label": { "en": "Status", "fr": "Statut" } }
+      ]
+    }
+  ],
+  "scene_actions": [
+    {
+      "key": "toggle_device",
+      "label": { "en": "Toggle a Wemo", "fr": "Basculer un Wemo" },
+      "description": {
+        "en": "Switch a Wemo off when it is on, on when it is off.",
+        "fr": "Éteint un Wemo allumé, allume un Wemo éteint."
+      },
+      "timeout_seconds": 20,
+      "fields": [
+        {
+          "key": "device",
+          "type": "select",
+          "source": "devices",
+          "label": { "en": "Wemo", "fr": "Wemo" },
+          "required": true
+        }
+      ],
+      "outputs": [
+        { "key": "toggled", "type": "boolean", "label": { "en": "Toggled", "fr": "Basculé" } },
+        {
+          "key": "is_on",
+          "type": "boolean",
+          "label": { "en": "Now on", "fr": "Maintenant allumé" }
+        }
+      ]
+    },
+    {
+      "key": "read_insight",
+      "label": { "en": "Read a Wemo Insight", "fr": "Lire un Wemo Insight" },
+      "description": {
+        "en": "Read the state, power and energy of the day of an Insight, for the next actions.",
+        "fr": "Lit l'état, la puissance et l'énergie du jour d'un Insight, pour les actions suivantes."
+      },
+      "timeout_seconds": 20,
+      "fields": [
+        {
+          "key": "device",
+          "type": "select",
+          "source": "devices",
+          "label": { "en": "Insight", "fr": "Insight" },
+          "required": true
+        }
+      ],
+      "outputs": [
+        {
+          "key": "reachable",
+          "type": "boolean",
+          "label": { "en": "Reachable", "fr": "Joignable" }
+        },
+        { "key": "state", "type": "string", "label": { "en": "State", "fr": "État" } },
+        { "key": "power", "type": "number", "label": { "en": "Power (W)", "fr": "Puissance (W)" } },
+        {
+          "key": "today_energy",
+          "type": "number",
+          "label": { "en": "Energy today (kWh)", "fr": "Énergie du jour (kWh)" }
+        }
+      ]
+    },
+    {
+      "key": "rediscover",
+      "label": { "en": "Search for Wemo devices", "fr": "Rechercher les Wemo" },
+      "description": {
+        "en": "Search the network for Wemo devices, and find again the ones that changed address.",
+        "fr": "Recherche les Wemo sur le réseau, et retrouve ceux qui ont changé d'adresse."
+      },
+      "timeout_seconds": 45,
+      "outputs": [
+        { "key": "found", "type": "number", "label": { "en": "Wemo found", "fr": "Wemo trouvés" } }
+      ]
+    }
+  ],
+  "widgets": [
+    {
+      "key": "wemo_overview",
+      "label": { "en": "Wemo devices", "fr": "Appareils Wemo" },
+      "description": {
+        "en": "Every Wemo: reachable or not, what it is doing, the power of the Insights.",
+        "fr": "Tous les Wemo : joignables ou non, ce qu'ils font, la puissance des Insight."
+      },
+      "icon": "power",
+      "action_timeout_seconds": 45
+    },
+    {
+      "key": "wemo_insight",
+      "label": { "en": "Wemo Insight", "fr": "Wemo Insight" },
+      "description": {
+        "en": "Live power and energy of one Insight, its day and a 24-hour curve.",
+        "fr": "Puissance et énergie en direct d'un Insight, sa journée et une courbe sur 24 h."
+      },
+      "icon": "zap",
+      "settings": [
+        {
+          "key": "device",
+          "type": "select",
+          "source": "devices",
+          "label": { "en": "Insight", "fr": "Insight" },
+          "required": true
+        }
+      ]
+    }
+  ]
+}
