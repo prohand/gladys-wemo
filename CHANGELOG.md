@@ -27,3 +27,7 @@ the notes of the version's GitHub Release.
 
 [Unreleased]: https://github.com/prohand/gladys-wemo/compare/v1.0.1...HEAD
 [1.0.1]: https://github.com/prohand/gladys-wemo/releases/tag/v1.0.1
+
+### Changed
+
+- `@gladysassistant/integration-sdk` updated to 0.15.0.
