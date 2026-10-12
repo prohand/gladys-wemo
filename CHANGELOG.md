@@ -10,6 +10,8 @@ the notes of the version's GitHub Release.
 
 ## [Unreleased]
 
+## [1.0.2] - 2026-10-12
+
 ### Changed
 
 - `@gladysassistant/integration-sdk` updated to 0.15.0.
@@ -31,5 +33,6 @@ the notes of the version's GitHub Release.
 - Configuration screen buttons: "Search for Wemo devices" and "Test the connection".
 - `SECURITY.md`, `CHANGELOG.md` and `CLAUDE.md`; CI (format, lint, tests on Node 22 and 24, store checks, Docker build), Release, multi-arch build and GitHub Release workflows; Dependabot.
 
-[Unreleased]: https://github.com/prohand/gladys-wemo/compare/v1.0.1...HEAD
+[Unreleased]: https://github.com/prohand/gladys-wemo/compare/v1.0.2...HEAD
+[1.0.2]: https://github.com/prohand/gladys-wemo/compare/v1.0.1...v1.0.2
 [1.0.1]: https://github.com/prohand/gladys-wemo/releases/tag/v1.0.1
