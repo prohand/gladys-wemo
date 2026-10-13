@@ -56,9 +56,9 @@ function overviewContent(fleet) {
         {
           type: 'text',
           text: {
-            en: 'No Wemo added yet. Search for them, then add them from the Discovery tab of the integration.',
+            en: 'No Wemo added yet. Search for them, then add them from the Discover tab of the integration.',
             fr: "Aucun Wemo ajouté pour l'instant. Lancez une recherche, puis ajoutez-les depuis l'onglet Découverte de l'intégration.",
-            de: 'Noch kein Wemo hinzugefügt. Starten Sie eine Suche und fügen Sie sie dann über den Tab „Entdecken“ der Integration hinzu.',
+            de: 'Noch kein Wemo hinzugefügt. Starte eine Suche und füge sie dann über den Tab „Entdecken“ der Integration hinzu.',
             es: 'Todavía no se ha añadido ningún Wemo. Inicie una búsqueda y añádalos desde la pestaña «Descubrir» de la integración.',
           },
         },
@@ -123,7 +123,7 @@ function insightContent(gladys, fleet, settings) {
           text: {
             en: 'Choose a Wemo Insight in the settings of this widget.',
             fr: 'Choisissez un Wemo Insight dans les réglages de ce widget.',
-            de: 'Wählen Sie einen Wemo Insight in den Widget-Einstellungen.',
+            de: 'Wähle einen Wemo Insight in den Widget-Einstellungen.',
             es: 'Elija un Wemo Insight en la configuración del widget.',
           },
         },

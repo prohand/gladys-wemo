@@ -19,15 +19,15 @@ export function describeDiscovery(result, fleet) {
     out.push({
       en: 'No Wemo answered. Check that it is on the same network as Gladys, or type its address in "Wemo addresses".',
       fr: "Aucun Wemo n'a répondu. Vérifiez qu'il est sur le même réseau que Gladys, ou saisissez son adresse dans « Adresses des Wemo ».",
-      de: 'Kein Wemo hat geantwortet. Prüfen Sie, ob er sich im selben Netzwerk wie Gladys befindet, oder tragen Sie seine Adresse unter „Wemo-Adressen“ ein.',
+      de: 'Kein Wemo hat geantwortet. Prüfe, ob er sich im selben Netzwerk wie Gladys befindet, oder trage seine Adresse unter „Wemo-Adressen“ ein.',
       es: 'Ningún Wemo ha respondido. Compruebe que está en la misma red que Gladys, o introduzca su dirección en «Direcciones de los Wemo».',
     });
   } else {
     const fresh = found.filter((device) => !created.has(device.serial)).length;
     out.push({
-      en: `${found.length} Wemo found, ${fresh} not added yet: add them from the Discovery tab.`,
+      en: `${found.length} Wemo found, ${fresh} not added yet: add them from the Discover tab.`,
       fr: `${found.length} Wemo trouvé(s), dont ${fresh} pas encore ajouté(s) : ajoutez-les depuis l'onglet Découverte.`,
-      de: `${found.length} Wemo gefunden, davon ${fresh} noch nicht hinzugefügt: Fügen Sie sie über den Tab „Entdecken“ hinzu.`,
+      de: `${found.length} Wemo gefunden, davon ${fresh} noch nicht hinzugefügt: Füge sie über den Tab „Entdecken“ hinzu.`,
       es: `${found.length} Wemo encontrado(s), de ellos ${fresh} aún sin añadir: añádalos desde la pestaña «Descubrir».`,
     });
     for (const device of found) {
@@ -84,7 +84,7 @@ export const ACTIONS = {
       return {
         en: 'No Wemo added to Gladys yet: run "Search for Wemo devices" first.',
         fr: "Aucun Wemo ajouté à Gladys pour l'instant : lancez d'abord « Rechercher les Wemo ».",
-        de: 'Noch kein Wemo zu Gladys hinzugefügt: Starten Sie zuerst „Wemo-Geräte suchen“.',
+        de: 'Noch kein Wemo zu Gladys hinzugefügt: Starte zuerst „Wemo-Geräte suchen“.',
         es: 'Todavía no se ha añadido ningún Wemo a Gladys: ejecute primero «Buscar dispositivos Wemo».',
       };
     }

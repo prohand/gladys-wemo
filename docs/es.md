@@ -26,7 +26,7 @@ local.
    posterior). La pantalla de instalación indica que solicita una **búsqueda
    de red SSDP**: así es como Gladys encuentra los Wemo por ella.
 2. Abra la pestaña **Descubrir** de la integración: aparecen los Wemo de su
-   red. Añada los que desee.
+   red. Pulse **Añadir a Gladys** en los que desee.
 3. Eso es todo: su estado se muestra en Gladys y puede controlarlos.
 
 Los Wemo ya deben estar en su Wi-Fi (configurados antes con la aplicación Wemo,
@@ -55,6 +55,8 @@ a encontrar por sí sola en sus otros puertos, comprobando su número de serie.
 
 ## Botones de la pestaña Configuración
 
+En la tarjeta **Acciones** de la pestaña **Configuración**:
+
 - **Buscar dispositivos Wemo** — lanza la búsqueda y enumera lo que se ha
   encontrado (y lo que no: una dirección que no responde, un dispositivo no
   compatible).
@@ -64,7 +66,7 @@ a encontrar por sí sola en sus otros puertos, comprobando su número de serie.
 ## Distintivo Local / Inaccesible
 
 Cada dispositivo muestra un distintivo: **Local** cuando responde,
-**Inaccesible** tras tres lecturas sin respuesta. La pestaña Configuración
+**Inaccesible** tras tres lecturas sin respuesta. La pestaña **Supervisión**
 indica «Ningún Wemo responde» cuando ya no responde ninguno.
 
 ## Escenas
@@ -113,5 +115,5 @@ Para un simple encendido/apagado, utilice el activador estándar de Gladys
   direcciones introducidas a mano siguen funcionando.
 - **Un Wemo se vuelve inaccesible de vez en cuando**: su Wi-Fi es débil, o ha
   cambiado de dirección. Resérvele una dirección IP fija en su router.
-- **Registros**: desde la interfaz de Gladys (o `docker logs`), con
+- **Registros**: en la pestaña **Registros** de la integración (o `docker logs`), con
   `LOG_LEVEL=debug` para el detalle de cada lectura.

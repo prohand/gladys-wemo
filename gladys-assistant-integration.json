@@ -5,7 +5,7 @@
   "description": {
     "en": "Control Belkin Wemo plugs, switches, dimmers and motion sensors on your local network.",
     "fr": "Pilotez prises, interrupteurs, variateurs et détecteurs Belkin Wemo en réseau local.",
-    "de": "Steuern Sie Belkin-Wemo-Steckdosen, Schalter, Dimmer und Bewegungsmelder im lokalen Netzwerk.",
+    "de": "Steuere Belkin-Wemo-Steckdosen, Schalter, Dimmer und Bewegungsmelder im lokalen Netzwerk.",
     "es": "Controle enchufes, interruptores, reguladores y detectores Belkin Wemo en su red local."
   },
   "version": "1.0.2",
@@ -31,9 +31,9 @@
         "es": "Primeros pasos"
       },
       "description": {
-        "en": "Wemo devices are controlled on your local network, without any account: the Belkin cloud is no longer needed (it closed in January 2026). Open the Discovery tab to find them, then add the ones you want. A Wemo that is not found automatically can be typed below by its IP address.",
+        "en": "Wemo devices are controlled on your local network, without any account: the Belkin cloud is no longer needed (it closed in January 2026). Open the Discover tab to find them, then add the ones you want. A Wemo that is not found automatically can be typed below by its IP address.",
         "fr": "Les Wemo sont pilotés sur votre réseau local, sans aucun compte : le cloud Belkin n'est plus nécessaire (il a fermé en janvier 2026). Ouvrez l'onglet Découverte pour les trouver, puis ajoutez ceux que vous voulez. Un Wemo qui n'est pas trouvé automatiquement peut être saisi ci-dessous par son adresse IP.",
-        "de": "Die Wemo-Geräte werden in Ihrem lokalen Netzwerk gesteuert, ganz ohne Konto: Die Belkin-Cloud wird nicht mehr benötigt (sie wurde im Januar 2026 abgeschaltet). Öffnen Sie den Tab „Entdecken“, um sie zu finden, und fügen Sie dann die gewünschten hinzu. Ein Wemo, der nicht automatisch gefunden wird, kann unten über seine IP-Adresse eingetragen werden.",
+        "de": "Die Wemo-Geräte werden in deinem lokalen Netzwerk gesteuert, ganz ohne Konto: Die Belkin-Cloud wird nicht mehr benötigt (sie wurde im Januar 2026 abgeschaltet). Öffne den Tab „Entdecken“, um sie zu finden, und füge dann die gewünschten hinzu. Ein Wemo, der nicht automatisch gefunden wird, kann unten über seine IP-Adresse eingetragen werden.",
         "es": "Los Wemo se controlan en su red local, sin ninguna cuenta: la nube de Belkin ya no es necesaria (cerró en enero de 2026). Abra la pestaña «Descubrir» para encontrarlos y añada los que desee. Un Wemo que no se encuentre automáticamente puede introducirse más abajo con su dirección IP."
       },
       "links": [

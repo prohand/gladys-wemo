@@ -1,6 +1,6 @@
 # Wemo
 
-Steuern Sie Ihre **Belkin-Wemo**-Geräte über Gladys, in Ihrem **lokalen
+Steuere deine **Belkin-Wemo**-Geräte über Gladys, in deinem **lokalen
 Netzwerk**: kein Konto, keine Cloud. Belkin hat seine Wemo-Cloud am 31. Januar
 2026 abgeschaltet; die lokale Steuerung, die diese Integration nutzt,
 funktioniert weiterhin.
@@ -23,22 +23,23 @@ Wemo-Protokoll nicht.
 
 ## Installation
 
-1. Installieren Sie die Integration **Wemo** aus dem Gladys-Katalog (Gladys 5.1
+1. Installiere die Integration **Wemo** aus dem Gladys-Katalog (Gladys 5.1
    oder neuer). Der Installationsbildschirm zeigt, dass sie eine
    **SSDP-Netzwerksuche** anfordert: So findet Gladys die Wemo-Geräte für sie.
-2. Öffnen Sie den Tab **Entdecken** der Integration: Die Wemo-Geräte Ihres
-   Netzwerks werden angezeigt. Fügen Sie die gewünschten hinzu.
-3. Das war's: Ihr Status wird in Gladys angezeigt und Sie können sie steuern.
+2. Öffne den Tab **Entdecken** der Integration: Die Wemo-Geräte deines
+   Netzwerks werden angezeigt. Klicke bei den gewünschten auf **Zu Gladys
+   hinzufügen**.
+3. Das war's: Ihr Status wird in Gladys angezeigt und du kannst sie steuern.
 
-Die Wemo-Geräte müssen bereits in Ihrem WLAN sein (früher mit der Wemo-App
+Die Wemo-Geräte müssen bereits in deinem WLAN sein (früher mit der Wemo-App
 eingerichtet oder mit einem Werkzeug wie `pywemo` wieder ins WLAN gebracht).
 
 ## Konfiguration
 
 - **Wemo-Adressen** — optional. Wenn ein Wemo nicht automatisch gefunden wird
-  (anderes VLAN, ein Mesh-WLAN, das Multicast filtert), tragen Sie hier seine
+  (anderes VLAN, ein Mesh-WLAN, das Multicast filtert), trage hier seine
   IP-Adresse ein, durch Kommas von den anderen getrennt. Der Port ist optional
-  (`192.168.1.20:49153`): Ohne ihn werden die üblichen Wemo-Ports (49152 bis 49156) ausprobiert. Geben Sie diesen Wemo eine **feste IP-Adresse**
+  (`192.168.1.20:49153`): Ohne ihn werden die üblichen Wemo-Ports (49152 bis 49156) ausprobiert. Gib diesen Wemo eine **feste IP-Adresse**
   (DHCP-Reservierung).
 - **Aktualisierungsintervall** — wie oft Steckdosen, Schalter und Dimmer
   abgefragt werden, in Sekunden (standardmäßig 10 s). Eine Änderung über die
@@ -56,6 +57,8 @@ Seriennummer.
 
 ## Schaltflächen im Tab Konfiguration
 
+In der Karte **Aktionen** des Tabs **Konfiguration**:
+
 - **Wemo-Geräte suchen** — startet die Suche und listet auf, was gefunden wurde
   (und was nicht: eine stumme Adresse, ein nicht unterstütztes Gerät).
 - **Verbindung testen** — fragt jeden zu Gladys hinzugefügten Wemo ab und
@@ -64,7 +67,7 @@ Seriennummer.
 ## Badge Lokal / Nicht erreichbar
 
 Jedes Gerät zeigt ein Badge: **Lokal**, wenn es antwortet, **Nicht
-erreichbar** nach drei Abfragen ohne Antwort. Der Tab Konfiguration meldet
+erreichbar** nach drei Abfragen ohne Antwort. Der Tab **Überwachung** meldet
 „Kein Wemo antwortet“, wenn keiner mehr antwortet.
 
 ## Szenen
@@ -83,7 +86,7 @@ Im Szenen-Editor (Kategorie **Integrationen**):
 - **Wemo erreichbar oder nicht** — ein Wemo antwortet nicht mehr, oder wieder.
   Variablen: `status` (`offline`, `online`), `device_name`.
 
-Für ein einfaches Ein/Aus verwenden Sie den Standard-Auslöser von Gladys
+Für ein einfaches Ein/Aus verwende den Standard-Auslöser von Gladys
 „Änderung von Gerätestatus“.
 
 **Aktionen**
@@ -100,20 +103,20 @@ Für ein einfaches Ein/Aus verwenden Sie den Standard-Auslöser von Gladys
 - **Wemo-Geräte** — alle Wemo auf einen Blick: wie viele antworten, was jeder
   gerade tut (nicht erreichbare zuerst), die Gesamtleistung der Insight und eine
   Schaltfläche **Wemo suchen**.
-- **Wemo Insight** — wählen Sie einen Insight in den Widget-Einstellungen:
+- **Wemo Insight** — wähle einen Insight in den Widget-Einstellungen:
   Leistung und Energie live, Verbrauch und Betriebszeit des Tages, eine
   24-Stunden-Leistungskurve und eine Ein/Aus-Schaltfläche.
 
 ## Fehlerbehebung
 
-- **Kein Wemo gefunden**: Prüfen Sie, ob sie sich im selben Netzwerk wie der
-  Gladys-Rechner befinden. Andernfalls tragen Sie ihre Adresse unter
+- **Kein Wemo gefunden**: Prüfe, ob sie sich im selben Netzwerk wie der
+  Gladys-Rechner befinden. Andernfalls trage ihre Adresse unter
   „Wemo-Adressen“ ein.
-- **„Automatische Suche nicht verfügbar“**: Ihr Gladys ist zu alt für die
+- **„Automatische Suche nicht verfügbar“**: Dein Gladys ist zu alt für die
   Netzwerksuche, oder die SSDP-Berechtigung wurde bei der Installation
   verweigert. Von Hand eingetragene Adressen funktionieren weiterhin.
 - **Ein Wemo wird ab und zu nicht erreichbar**: Sein WLAN ist schwach, oder er
-  hat seine Adresse geändert. Reservieren Sie ihm in Ihrem Router eine feste
+  hat seine Adresse geändert. Reserviere ihm in deinem Router eine feste
   IP-Adresse.
-- **Protokolle**: über die Gladys-Oberfläche (oder `docker logs`), mit
+- **Protokolle**: im Tab **Protokolle** der Integration (oder `docker logs`), mit
   `LOG_LEVEL=debug` für die Details jeder Abfrage.
