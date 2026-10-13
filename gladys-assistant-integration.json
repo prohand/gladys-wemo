@@ -4,7 +4,9 @@
   "name": "Wemo",
   "description": {
     "en": "Control Belkin Wemo plugs, switches, dimmers and motion sensors on your local network.",
-    "fr": "Pilotez prises, interrupteurs, variateurs et détecteurs Belkin Wemo en réseau local."
+    "fr": "Pilotez prises, interrupteurs, variateurs et détecteurs Belkin Wemo en réseau local.",
+    "de": "Steuere Belkin-Wemo-Steckdosen, Schalter, Dimmer und Bewegungsmelder im lokalen Netzwerk.",
+    "es": "Controle enchufes, interruptores, reguladores y detectores Belkin Wemo en su red local."
   },
   "version": "1.0.2",
   "docker_image": "ghcr.io/prohand/gladys-wemo:1.0.2",
@@ -24,18 +26,24 @@
       "type": "section",
       "label": {
         "en": "Getting started",
-        "fr": "Pour commencer"
+        "fr": "Pour commencer",
+        "de": "Erste Schritte",
+        "es": "Primeros pasos"
       },
       "description": {
-        "en": "Wemo devices are controlled on your local network, without any account: the Belkin cloud is no longer needed (it closed in January 2026). Open the Discovery tab to find them, then add the ones you want. A Wemo that is not found automatically can be typed below by its IP address.",
-        "fr": "Les Wemo sont pilotés sur votre réseau local, sans aucun compte : le cloud Belkin n'est plus nécessaire (il a fermé en janvier 2026). Ouvrez l'onglet Découverte pour les trouver, puis ajoutez ceux que vous voulez. Un Wemo qui n'est pas trouvé automatiquement peut être saisi ci-dessous par son adresse IP."
+        "en": "Wemo devices are controlled on your local network, without any account: the Belkin cloud is no longer needed (it closed in January 2026). Open the Discover tab to find them, then add the ones you want. A Wemo that is not found automatically can be typed below by its IP address.",
+        "fr": "Les Wemo sont pilotés sur votre réseau local, sans aucun compte : le cloud Belkin n'est plus nécessaire (il a fermé en janvier 2026). Ouvrez l'onglet Découverte pour les trouver, puis ajoutez ceux que vous voulez. Un Wemo qui n'est pas trouvé automatiquement peut être saisi ci-dessous par son adresse IP.",
+        "de": "Die Wemo-Geräte werden in deinem lokalen Netzwerk gesteuert, ganz ohne Konto: Die Belkin-Cloud wird nicht mehr benötigt (sie wurde im Januar 2026 abgeschaltet). Öffne den Tab „Entdecken“, um sie zu finden, und füge dann die gewünschten hinzu. Ein Wemo, der nicht automatisch gefunden wird, kann unten über seine IP-Adresse eingetragen werden.",
+        "es": "Los Wemo se controlan en su red local, sin ninguna cuenta: la nube de Belkin ya no es necesaria (cerró en enero de 2026). Abra la pestaña «Descubrir» para encontrarlos y añada los que desee. Un Wemo que no se encuentre automáticamente puede introducirse más abajo con su dirección IP."
       },
       "links": [
         {
           "url": "https://github.com/prohand/gladys-wemo/blob/main/docs/en.md",
           "label": {
             "en": "Integration documentation",
-            "fr": "Documentation de l'intégration"
+            "fr": "Documentation de l'intégration",
+            "de": "Dokumentation der Integration",
+            "es": "Documentación de la integración"
           }
         }
       ]
@@ -45,15 +53,21 @@
       "type": "string",
       "label": {
         "en": "Wemo addresses",
-        "fr": "Adresses des Wemo"
+        "fr": "Adresses des Wemo",
+        "de": "Wemo-Adressen",
+        "es": "Direcciones de los Wemo"
       },
       "description": {
         "en": "Optional. IP addresses of Wemo devices the automatic search does not find (another VLAN, mesh Wi-Fi), separated by commas. A port can be added: 192.168.1.20:49153.",
-        "fr": "Facultatif. Adresses IP des Wemo que la recherche automatique ne trouve pas (autre VLAN, Wi-Fi maillé), séparées par des virgules. Un port peut être ajouté : 192.168.1.20:49153."
+        "fr": "Facultatif. Adresses IP des Wemo que la recherche automatique ne trouve pas (autre VLAN, Wi-Fi maillé), séparées par des virgules. Un port peut être ajouté : 192.168.1.20:49153.",
+        "de": "Optional. IP-Adressen der Wemo-Geräte, die die automatische Suche nicht findet (anderes VLAN, Mesh-WLAN), durch Kommas getrennt. Ein Port kann angegeben werden: 192.168.1.20:49153.",
+        "es": "Opcional. Direcciones IP de los Wemo que la búsqueda automática no encuentra (otra VLAN, Wi-Fi mallada), separadas por comas. Se puede añadir un puerto: 192.168.1.20:49153."
       },
       "placeholder": {
         "en": "e.g. 192.168.1.20, 192.168.1.21",
-        "fr": "ex. 192.168.1.20, 192.168.1.21"
+        "fr": "ex. 192.168.1.20, 192.168.1.21",
+        "de": "z. B. 192.168.1.20, 192.168.1.21",
+        "es": "p. ej. 192.168.1.20, 192.168.1.21"
       },
       "required": false
     },
@@ -62,11 +76,15 @@
       "type": "number",
       "label": {
         "en": "Refresh interval (s)",
-        "fr": "Intervalle de rafraîchissement (s)"
+        "fr": "Intervalle de rafraîchissement (s)",
+        "de": "Aktualisierungsintervall (s)",
+        "es": "Intervalo de actualización (s)"
       },
       "description": {
         "en": "How often plugs, switches and dimmers are read, in seconds. A change made from the Wemo button or app shows in Gladys within this delay.",
-        "fr": "Fréquence de lecture des prises, interrupteurs et variateurs, en secondes. Un changement fait depuis le bouton du Wemo ou son application apparaît dans Gladys dans ce délai."
+        "fr": "Fréquence de lecture des prises, interrupteurs et variateurs, en secondes. Un changement fait depuis le bouton du Wemo ou son application apparaît dans Gladys dans ce délai.",
+        "de": "Wie oft Steckdosen, Schalter und Dimmer abgefragt werden, in Sekunden. Eine Änderung über die Taste des Wemo oder seine App erscheint innerhalb dieser Zeit in Gladys.",
+        "es": "Frecuencia de lectura de los enchufes, interruptores y reguladores, en segundos. Un cambio hecho desde el botón del Wemo o su aplicación aparece en Gladys dentro de este plazo."
       },
       "required": false,
       "default": 10,
@@ -78,11 +96,15 @@
       "type": "number",
       "label": {
         "en": "Motion sensor interval (s)",
-        "fr": "Intervalle des détecteurs (s)"
+        "fr": "Intervalle des détecteurs (s)",
+        "de": "Intervall der Bewegungsmelder (s)",
+        "es": "Intervalo de los detectores (s)"
       },
       "description": {
         "en": "How often motion sensors are read, in seconds: the delay before a scene starts on a motion.",
-        "fr": "Fréquence de lecture des détecteurs de mouvement, en secondes : le délai avant qu'une scène démarre sur un mouvement."
+        "fr": "Fréquence de lecture des détecteurs de mouvement, en secondes : le délai avant qu'une scène démarre sur un mouvement.",
+        "de": "Wie oft Bewegungsmelder abgefragt werden, in Sekunden: die Verzögerung, bevor eine Szene bei einer Bewegung startet.",
+        "es": "Frecuencia de lectura de los detectores de movimiento, en segundos: el retardo antes de que una escena se inicie con un movimiento."
       },
       "required": false,
       "default": 2,
@@ -94,11 +116,15 @@
       "type": "boolean",
       "label": {
         "en": "Find a silent Wemo again",
-        "fr": "Retrouver un Wemo silencieux"
+        "fr": "Retrouver un Wemo silencieux",
+        "de": "Stummen Wemo wiederfinden",
+        "es": "Volver a encontrar un Wemo silencioso"
       },
       "description": {
         "en": "When a Wemo stops answering, search the network for it (it may have a new IP address). At most once every five minutes.",
-        "fr": "Quand un Wemo ne répond plus, le rechercher sur le réseau (il a pu changer d'adresse IP). Au plus une fois toutes les cinq minutes."
+        "fr": "Quand un Wemo ne répond plus, le rechercher sur le réseau (il a pu changer d'adresse IP). Au plus une fois toutes les cinq minutes.",
+        "de": "Wenn ein Wemo nicht mehr antwortet, im Netzwerk nach ihm suchen (er hat vielleicht eine neue IP-Adresse). Höchstens einmal alle fünf Minuten.",
+        "es": "Cuando un Wemo deja de responder, buscarlo en la red (puede haber cambiado de dirección IP). Como máximo una vez cada cinco minutos."
       },
       "required": false,
       "default": true
@@ -109,7 +135,9 @@
       "key": "scan",
       "label": {
         "en": "Search for Wemo devices",
-        "fr": "Rechercher les Wemo"
+        "fr": "Rechercher les Wemo",
+        "de": "Wemo-Geräte suchen",
+        "es": "Buscar dispositivos Wemo"
       },
       "timeout_seconds": 45
     },
@@ -117,7 +145,9 @@
       "key": "test_connection",
       "label": {
         "en": "Test the connection",
-        "fr": "Tester la connexion"
+        "fr": "Tester la connexion",
+        "de": "Verbindung testen",
+        "es": "Probar la conexión"
       },
       "timeout_seconds": 60
     }
@@ -127,11 +157,15 @@
       "key": "motion_detected",
       "label": {
         "en": "Wemo motion detected",
-        "fr": "Mouvement détecté (Wemo)"
+        "fr": "Mouvement détecté (Wemo)",
+        "de": "Wemo-Bewegung erkannt",
+        "es": "Movimiento detectado (Wemo)"
       },
       "description": {
         "en": "A Wemo Motion sensor saw a movement.",
-        "fr": "Un détecteur Wemo Motion a vu un mouvement."
+        "fr": "Un détecteur Wemo Motion a vu un mouvement.",
+        "de": "Ein Wemo-Motion-Sensor hat eine Bewegung erkannt.",
+        "es": "Un detector Wemo Motion ha detectado un movimiento."
       },
       "fields": [
         {
@@ -140,7 +174,9 @@
           "source": "devices",
           "label": {
             "en": "Sensor",
-            "fr": "Détecteur"
+            "fr": "Détecteur",
+            "de": "Sensor",
+            "es": "Detector"
           }
         }
       ],
@@ -150,7 +186,9 @@
           "type": "string",
           "label": {
             "en": "Sensor name",
-            "fr": "Nom du détecteur"
+            "fr": "Nom du détecteur",
+            "de": "Name des Sensors",
+            "es": "Nombre del detector"
           }
         }
       ]
@@ -159,11 +197,15 @@
       "key": "insight_state_changed",
       "label": {
         "en": "Wemo Insight state changed",
-        "fr": "État d'un Wemo Insight changé"
+        "fr": "État d'un Wemo Insight changé",
+        "de": "Status eines Wemo Insight geändert",
+        "es": "Cambio de estado de un Wemo Insight"
       },
       "description": {
         "en": "An Insight switched on, went to standby (the appliance finished) or switched off.",
-        "fr": "Un Insight s'est allumé, est passé en veille (l'appareil a fini) ou s'est éteint."
+        "fr": "Un Insight s'est allumé, est passé en veille (l'appareil a fini) ou s'est éteint.",
+        "de": "Ein Insight wurde eingeschaltet, ist in den Standby gegangen (das Gerät ist fertig) oder wurde ausgeschaltet.",
+        "es": "Un Insight se ha encendido, ha pasado a reposo (el aparato ha terminado) o se ha apagado."
       },
       "fields": [
         {
@@ -172,7 +214,9 @@
           "source": "devices",
           "label": {
             "en": "Insight",
-            "fr": "Insight"
+            "fr": "Insight",
+            "de": "Insight",
+            "es": "Insight"
           }
         },
         {
@@ -180,28 +224,36 @@
           "type": "multi_select",
           "label": {
             "en": "New state",
-            "fr": "Nouvel état"
+            "fr": "Nouvel état",
+            "de": "Neuer Status",
+            "es": "Nuevo estado"
           },
           "options": [
             {
               "value": "on",
               "label": {
                 "en": "On (running)",
-                "fr": "Allumé (en marche)"
+                "fr": "Allumé (en marche)",
+                "de": "Ein (läuft)",
+                "es": "Encendido (en marcha)"
               }
             },
             {
               "value": "standby",
               "label": {
                 "en": "Standby (finished)",
-                "fr": "En veille (terminé)"
+                "fr": "En veille (terminé)",
+                "de": "Standby (fertig)",
+                "es": "En reposo (terminado)"
               }
             },
             {
               "value": "off",
               "label": {
                 "en": "Off",
-                "fr": "Éteint"
+                "fr": "Éteint",
+                "de": "Aus",
+                "es": "Apagado"
               }
             }
           ]
@@ -213,7 +265,9 @@
           "type": "string",
           "label": {
             "en": "Insight name",
-            "fr": "Nom de l'Insight"
+            "fr": "Nom de l'Insight",
+            "de": "Name des Insight",
+            "es": "Nombre del Insight"
           }
         },
         {
@@ -221,7 +275,9 @@
           "type": "string",
           "label": {
             "en": "New state",
-            "fr": "Nouvel état"
+            "fr": "Nouvel état",
+            "de": "Neuer Status",
+            "es": "Nuevo estado"
           }
         },
         {
@@ -229,7 +285,9 @@
           "type": "number",
           "label": {
             "en": "Power (W)",
-            "fr": "Puissance (W)"
+            "fr": "Puissance (W)",
+            "de": "Leistung (W)",
+            "es": "Potencia (W)"
           }
         }
       ]
@@ -238,11 +296,15 @@
       "key": "connection_changed",
       "label": {
         "en": "Wemo reachable or not",
-        "fr": "Wemo joignable ou non"
+        "fr": "Wemo joignable ou non",
+        "de": "Wemo erreichbar oder nicht",
+        "es": "Wemo accesible o no"
       },
       "description": {
         "en": "A Wemo stopped answering on the network, or answers again.",
-        "fr": "Un Wemo ne répond plus sur le réseau, ou répond à nouveau."
+        "fr": "Un Wemo ne répond plus sur le réseau, ou répond à nouveau.",
+        "de": "Ein Wemo antwortet im Netzwerk nicht mehr, oder wieder.",
+        "es": "Un Wemo ha dejado de responder en la red, o vuelve a responder."
       },
       "fields": [
         {
@@ -251,7 +313,9 @@
           "source": "devices",
           "label": {
             "en": "Device",
-            "fr": "Appareil"
+            "fr": "Appareil",
+            "de": "Gerät",
+            "es": "Dispositivo"
           }
         },
         {
@@ -259,21 +323,27 @@
           "type": "multi_select",
           "label": {
             "en": "Status",
-            "fr": "Statut"
+            "fr": "Statut",
+            "de": "Status",
+            "es": "Estado"
           },
           "options": [
             {
               "value": "offline",
               "label": {
                 "en": "Unreachable",
-                "fr": "Injoignable"
+                "fr": "Injoignable",
+                "de": "Nicht erreichbar",
+                "es": "Inaccesible"
               }
             },
             {
               "value": "online",
               "label": {
                 "en": "Back online",
-                "fr": "De nouveau joignable"
+                "fr": "De nouveau joignable",
+                "de": "Wieder erreichbar",
+                "es": "De nuevo accesible"
               }
             }
           ]
@@ -285,7 +355,9 @@
           "type": "string",
           "label": {
             "en": "Device name",
-            "fr": "Nom de l'appareil"
+            "fr": "Nom de l'appareil",
+            "de": "Gerätename",
+            "es": "Nombre del dispositivo"
           }
         },
         {
@@ -293,7 +365,9 @@
           "type": "string",
           "label": {
             "en": "Status",
-            "fr": "Statut"
+            "fr": "Statut",
+            "de": "Status",
+            "es": "Estado"
           }
         }
       ]
@@ -304,11 +378,15 @@
       "key": "toggle_device",
       "label": {
         "en": "Toggle a Wemo",
-        "fr": "Basculer un Wemo"
+        "fr": "Basculer un Wemo",
+        "de": "Wemo umschalten",
+        "es": "Alternar un Wemo"
       },
       "description": {
         "en": "Switch a Wemo off when it is on, on when it is off.",
-        "fr": "Éteint un Wemo allumé, allume un Wemo éteint."
+        "fr": "Éteint un Wemo allumé, allume un Wemo éteint.",
+        "de": "Schaltet einen eingeschalteten Wemo aus und einen ausgeschalteten ein.",
+        "es": "Apaga un Wemo encendido y enciende un Wemo apagado."
       },
       "timeout_seconds": 20,
       "fields": [
@@ -318,7 +396,9 @@
           "source": "devices",
           "label": {
             "en": "Wemo",
-            "fr": "Wemo"
+            "fr": "Wemo",
+            "de": "Wemo",
+            "es": "Wemo"
           },
           "required": true
         }
@@ -329,7 +409,9 @@
           "type": "boolean",
           "label": {
             "en": "Toggled",
-            "fr": "Basculé"
+            "fr": "Basculé",
+            "de": "Umgeschaltet",
+            "es": "Alternado"
           }
         },
         {
@@ -337,7 +419,9 @@
           "type": "boolean",
           "label": {
             "en": "Now on",
-            "fr": "Maintenant allumé"
+            "fr": "Maintenant allumé",
+            "de": "Jetzt eingeschaltet",
+            "es": "Ahora encendido"
           }
         }
       ]
@@ -346,11 +430,15 @@
       "key": "read_insight",
       "label": {
         "en": "Read a Wemo Insight",
-        "fr": "Lire un Wemo Insight"
+        "fr": "Lire un Wemo Insight",
+        "de": "Wemo Insight auslesen",
+        "es": "Leer un Wemo Insight"
       },
       "description": {
         "en": "Read the state, power and energy of the day of an Insight, for the next actions.",
-        "fr": "Lit l'état, la puissance et l'énergie du jour d'un Insight, pour les actions suivantes."
+        "fr": "Lit l'état, la puissance et l'énergie du jour d'un Insight, pour les actions suivantes.",
+        "de": "Liest Status, Leistung und Tagesenergie eines Insight für die folgenden Aktionen.",
+        "es": "Lee el estado, la potencia y la energía del día de un Insight, para las acciones siguientes."
       },
       "timeout_seconds": 20,
       "fields": [
@@ -360,7 +448,9 @@
           "source": "devices",
           "label": {
             "en": "Insight",
-            "fr": "Insight"
+            "fr": "Insight",
+            "de": "Insight",
+            "es": "Insight"
           },
           "required": true
         }
@@ -371,7 +461,9 @@
           "type": "boolean",
           "label": {
             "en": "Reachable",
-            "fr": "Joignable"
+            "fr": "Joignable",
+            "de": "Erreichbar",
+            "es": "Accesible"
           }
         },
         {
@@ -379,7 +471,9 @@
           "type": "string",
           "label": {
             "en": "State",
-            "fr": "État"
+            "fr": "État",
+            "de": "Status",
+            "es": "Estado"
           }
         },
         {
@@ -387,7 +481,9 @@
           "type": "number",
           "label": {
             "en": "Power (W)",
-            "fr": "Puissance (W)"
+            "fr": "Puissance (W)",
+            "de": "Leistung (W)",
+            "es": "Potencia (W)"
           }
         },
         {
@@ -395,7 +491,9 @@
           "type": "number",
           "label": {
             "en": "Energy today (kWh)",
-            "fr": "Énergie du jour (kWh)"
+            "fr": "Énergie du jour (kWh)",
+            "de": "Energie heute (kWh)",
+            "es": "Energía de hoy (kWh)"
           }
         }
       ]
@@ -404,11 +502,15 @@
       "key": "rediscover",
       "label": {
         "en": "Search for Wemo devices",
-        "fr": "Rechercher les Wemo"
+        "fr": "Rechercher les Wemo",
+        "de": "Wemo-Geräte suchen",
+        "es": "Buscar dispositivos Wemo"
       },
       "description": {
         "en": "Search the network for Wemo devices, and find again the ones that changed address.",
-        "fr": "Recherche les Wemo sur le réseau, et retrouve ceux qui ont changé d'adresse."
+        "fr": "Recherche les Wemo sur le réseau, et retrouve ceux qui ont changé d'adresse.",
+        "de": "Sucht Wemo-Geräte im Netzwerk und findet die wieder, deren Adresse sich geändert hat.",
+        "es": "Busca los Wemo en la red y vuelve a encontrar los que han cambiado de dirección."
       },
       "timeout_seconds": 45,
       "outputs": [
@@ -417,7 +519,9 @@
           "type": "number",
           "label": {
             "en": "Wemo found",
-            "fr": "Wemo trouvés"
+            "fr": "Wemo trouvés",
+            "de": "Gefundene Wemo",
+            "es": "Wemo encontrados"
           }
         }
       ]
@@ -428,11 +532,15 @@
       "key": "wemo_overview",
       "label": {
         "en": "Wemo devices",
-        "fr": "Appareils Wemo"
+        "fr": "Appareils Wemo",
+        "de": "Wemo-Geräte",
+        "es": "Dispositivos Wemo"
       },
       "description": {
         "en": "Every Wemo: reachable or not, what it is doing, the power of the Insights.",
-        "fr": "Tous les Wemo : joignables ou non, ce qu'ils font, la puissance des Insight."
+        "fr": "Tous les Wemo : joignables ou non, ce qu'ils font, la puissance des Insight.",
+        "de": "Alle Wemo: erreichbar oder nicht, was sie gerade tun, die Leistung der Insight.",
+        "es": "Todos los Wemo: accesibles o no, lo que hacen, la potencia de los Insight."
       },
       "icon": "power",
       "action_timeout_seconds": 45
@@ -441,11 +549,15 @@
       "key": "wemo_insight",
       "label": {
         "en": "Wemo Insight",
-        "fr": "Wemo Insight"
+        "fr": "Wemo Insight",
+        "de": "Wemo Insight",
+        "es": "Wemo Insight"
       },
       "description": {
         "en": "Live power and energy of one Insight, its day and a 24-hour curve.",
-        "fr": "Puissance et énergie en direct d'un Insight, sa journée et une courbe sur 24 h."
+        "fr": "Puissance et énergie en direct d'un Insight, sa journée et une courbe sur 24 h.",
+        "de": "Leistung und Energie eines Insight live, sein Tag und eine 24-Stunden-Kurve.",
+        "es": "Potencia y energía en directo de un Insight, su día y una curva de 24 horas."
       },
       "icon": "zap",
       "settings": [
@@ -455,7 +567,9 @@
           "source": "devices",
           "label": {
             "en": "Insight",
-            "fr": "Insight"
+            "fr": "Insight",
+            "de": "Insight",
+            "es": "Insight"
           },
           "required": true
         }

@@ -21,7 +21,7 @@ import {
   createLogger,
 } from '@gladysassistant/integration-sdk';
 import { describeDiscovery } from './actions.js';
-import { describeState } from './labels.js';
+import { describeState, eachLanguage } from './labels.js';
 import { FEATURES, idsOf } from '../devices/index.js';
 import { insightStateName } from '../wemo/fleet.js';
 import { KINDS } from '../wemo/models.js';
@@ -44,7 +44,7 @@ function overviewContent(fleet) {
   const { total, online } = fleet.summary();
   const searchButton = {
     type: 'button',
-    label: { en: 'Search for Wemo', fr: 'Chercher les Wemo' },
+    label: { en: 'Search for Wemo', fr: 'Chercher les Wemo', de: 'Wemo suchen', es: 'Buscar Wemo' },
     icon: 'search',
     style: 'secondary',
     action: { key: WIDGET_ACTIONS.REDISCOVER },
@@ -56,8 +56,10 @@ function overviewContent(fleet) {
         {
           type: 'text',
           text: {
-            en: 'No Wemo added yet. Search for them, then add them from the Discovery tab of the integration.',
+            en: 'No Wemo added yet. Search for them, then add them from the Discover tab of the integration.',
             fr: "Aucun Wemo ajouté pour l'instant. Lancez une recherche, puis ajoutez-les depuis l'onglet Découverte de l'intégration.",
+            de: 'Noch kein Wemo hinzugefügt. Starte eine Suche und füge sie dann über den Tab „Entdecken“ der Integration hinzu.',
+            es: 'Todavía no se ha añadido ningún Wemo. Inicie una búsqueda y añádalos desde la pestaña «Descubrir» de la integración.',
           },
         },
         searchButton,
@@ -68,7 +70,7 @@ function overviewContent(fleet) {
   const components = [
     {
       type: 'value',
-      label: { en: 'Reachable', fr: 'Joignables' },
+      label: { en: 'Reachable', fr: 'Joignables', de: 'Erreichbar', es: 'Accesibles' },
       icon: 'wifi',
       value: `${online}/${total}`,
       color:
@@ -84,7 +86,12 @@ function overviewContent(fleet) {
     const watts = insights.reduce((sum, entry) => sum + (entry.reading?.powerW ?? 0), 0);
     components.push({
       type: 'value',
-      label: { en: 'Insight power', fr: 'Puissance Insight' },
+      label: {
+        en: 'Insight power',
+        fr: 'Puissance Insight',
+        de: 'Insight-Leistung',
+        es: 'Potencia Insight',
+      },
       icon: 'zap',
       value: Math.round(watts),
       unit: 'W',
@@ -116,6 +123,8 @@ function insightContent(gladys, fleet, settings) {
           text: {
             en: 'Choose a Wemo Insight in the settings of this widget.',
             fr: 'Choisissez un Wemo Insight dans les réglages de ce widget.',
+            de: 'Wähle einen Wemo Insight in den Widget-Einstellungen.',
+            es: 'Elija un Wemo Insight en la configuración del widget.',
           },
         },
       ],
@@ -123,18 +132,29 @@ function insightContent(gladys, fleet, settings) {
   }
   const ids = idsOf(gladys, entry.serial);
   const reading = entry.reading;
-  const status = [{ label: { en: 'State', fr: 'État' }, icon: 'power', ...describeState(entry) }];
+  const status = [
+    {
+      label: { en: 'State', fr: 'État', de: 'Status', es: 'Estado' },
+      icon: 'power',
+      ...describeState(entry),
+    },
+  ];
   if (reading && entry.online !== false) {
     const minutes = Math.round((reading.onTodaySeconds ?? 0) / 60);
     status.push(
       {
-        label: { en: 'Today', fr: "Aujourd'hui" },
+        label: { en: 'Today', fr: "Aujourd'hui", de: 'Heute', es: 'Hoy' },
         icon: 'calendar',
         value: `${reading.todayKwh.toFixed(2)} kWh`,
         color: WIDGET_COLORS.NEUTRAL,
       },
       {
-        label: { en: 'Running today', fr: "En marche aujourd'hui" },
+        label: {
+          en: 'Running today',
+          fr: "En marche aujourd'hui",
+          de: 'Heute in Betrieb',
+          es: 'En marcha hoy',
+        },
         icon: 'clock',
         value: `${Math.floor(minutes / 60)} h ${String(minutes % 60).padStart(2, '0')}`,
         color: WIDGET_COLORS.NEUTRAL,
@@ -144,19 +164,24 @@ function insightContent(gladys, fleet, settings) {
   const components = [
     {
       type: 'value',
-      label: { en: 'Power', fr: 'Puissance' },
+      label: { en: 'Power', fr: 'Puissance', de: 'Leistung', es: 'Potencia' },
       icon: 'zap',
       device_feature: ids.feature(FEATURES.POWER),
     },
     {
       type: 'value',
-      label: { en: 'Energy', fr: 'Énergie' },
+      label: { en: 'Energy', fr: 'Énergie', de: 'Energie', es: 'Energía' },
       icon: 'battery-charging',
       device_feature: ids.feature(FEATURES.ENERGY),
     },
     {
       type: 'chart',
-      title: { en: 'Power, last 24 h', fr: 'Puissance, 24 dernières h' },
+      title: {
+        en: 'Power, last 24 h',
+        fr: 'Puissance, 24 dernières h',
+        de: 'Leistung, letzte 24 h',
+        es: 'Potencia, últimas 24 h',
+      },
       chart_type: WIDGET_CHART_TYPES.AREA,
       device_features: [ids.feature(FEATURES.POWER)],
       interval: WIDGET_CHART_INTERVALS.LAST_DAY,
@@ -168,7 +193,9 @@ function insightContent(gladys, fleet, settings) {
     const isOn = insightStateName(reading.insightState) !== 'off';
     components.push({
       type: 'button',
-      label: isOn ? { en: 'Turn off', fr: 'Éteindre' } : { en: 'Turn on', fr: 'Allumer' },
+      label: isOn
+        ? { en: 'Turn off', fr: 'Éteindre', de: 'Ausschalten', es: 'Apagar' }
+        : { en: 'Turn on', fr: 'Allumer', de: 'Einschalten', es: 'Encender' },
       icon: 'power',
       style: isOn ? 'danger' : 'primary',
       device_feature: ids.feature(FEATURES.BINARY),
@@ -193,10 +220,7 @@ export const WIDGETS = {
       const result = await fleet.rediscover();
       const message = describeDiscovery(result, fleet);
       // A toast holds 200 characters: the first line says it all.
-      return {
-        en: truncate(message.en.split('\n')[0], 200),
-        fr: truncate(message.fr.split('\n')[0], 200),
-      };
+      return eachLanguage((lang) => truncate(message[lang].split('\n')[0], 200));
     },
   },
 

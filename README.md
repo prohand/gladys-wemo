@@ -9,7 +9,8 @@ Built with the JavaScript SDK
 from the official
 [integration template](https://github.com/GladysAssistant/integration-template-js).
 
-User documentation: [English](docs/en.md) · [Français](docs/fr.md).
+User documentation: [English](docs/en.md) · [Français](docs/fr.md) · [Deutsch](docs/de.md) ·
+[Español](docs/es.md).
 
 ## Features
 
@@ -50,7 +51,7 @@ User documentation: [English](docs/en.md) · [Français](docs/fr.md).
 │  │  └─ xml.js                      #   minimal XML helpers
 │  ├─ devices/index.js               # Gladys devices, features, params, external ids
 │  └─ capabilities/                  # actions, scene actions, widgets (Gladys 5.1+)
-├─ docs/en.md, docs/fr.md            # user documentation (re-hosted by Gladys)
+├─ docs/{en,fr,de,es}.md             # user documentation (re-hosted by Gladys)
 ├─ test/                             # unit tests (`node --test`), fake Gladys / Wemo LAN / clock
 ├─ gladys-assistant-integration.json # manifest
 ├─ Dockerfile                        # Node 24 Alpine, read-only rootfs ready, non-root

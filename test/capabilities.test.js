@@ -17,6 +17,7 @@ import {
   WIDGET_ACTIONS,
   createWidgetRefresher,
 } from '../src/capabilities/widgets.js';
+import { LANGUAGES, eachLanguage, lines, untranslated } from '../src/capabilities/labels.js';
 import { buildDevice, idsOf } from '../src/devices/index.js';
 import { createWemoClient } from '../src/wemo/client.js';
 import { createFleet } from '../src/wemo/fleet.js';
@@ -125,6 +126,9 @@ test('"Search for Wemo devices" publishes them and lists what it found', async (
   const message = await ACTIONS.scan(gladys, { fleet });
   assert.match(message.en, /3 Wemo found, 2 not added yet/);
   assert.match(message.fr, /3 Wemo trouvé\(s\), dont 2 pas encore/);
+  assert.match(message.de, /3 Wemo gefunden, davon 2 noch nicht/);
+  assert.match(message.es, /3 Wemo encontrado\(s\), de ellos 2 aún sin añadir/);
+  assert.match(message.es, /Washer \(192\.168\.1\.22\)/);
   assert.match(message.en, /Washer \(192\.168\.1\.22\)/);
   assert.equal(gladys.lastDiscovered().length, 3);
 });
@@ -144,6 +148,8 @@ test('"Test the connection" reads every Wemo now', async () => {
   assert.match(message.en, /OK {2}Kitchen \(192\.168\.1\.20\): Off/);
   assert.match(message.en, /KO {2}Hall \(192\.168\.1\.23\), port 49153: Connection failed/);
   assert.match(message.fr, /OK {2}Kitchen \(192\.168\.1\.20\) : Éteint/);
+  assert.match(message.de, /OK {2}Kitchen \(192\.168\.1\.20\): Aus/);
+  assert.match(message.es, /KO {2}Hall \(192\.168\.1\.23\), puerto 49153: Connection failed/);
 
   const empty = setup({ devices: [] });
   assert.match(
@@ -186,7 +192,10 @@ test('the overview button runs a search and answers a short toast', async () => 
     actionKey: WIDGET_ACTIONS.REDISCOVER,
     fleet,
   });
-  assert.ok(toast.en.length <= 200 && toast.fr.length <= 200);
+  assert.deepEqual(Object.keys(toast), LANGUAGES);
+  for (const lang of LANGUAGES) {
+    assert.ok(toast[lang].length > 0 && toast[lang].length <= 200, lang);
+  }
   assert.match(toast.en, /3 Wemo found/);
   await assert.rejects(
     WIDGETS[OVERVIEW_WIDGET].action(gladys, { actionKey: 'nope', fleet }),
@@ -242,4 +251,67 @@ test('widget nudges are throttled to one per 10 s, the last one kept', async () 
   refresher.cancel();
   await clock.advance(20_000);
   assert.deepEqual(gladys.widgetRefreshes.length, 4);
+});
+
+// Every multi-language object the integration sends carries every language.
+function assertEveryLanguage(node, where) {
+  if (Array.isArray(node)) {
+    node.forEach((item, i) => assertEveryLanguage(item, `${where}[${i}]`));
+    return;
+  }
+  if (!node || typeof node !== 'object') {
+    return;
+  }
+  if (typeof node.en === 'string') {
+    assert.deepEqual(Object.keys(node), LANGUAGES, `languages of ${where}`);
+    return;
+  }
+  for (const [key, value] of Object.entries(node)) {
+    assertEveryLanguage(value, `${where}.${key}`);
+  }
+}
+
+test('messages and widget contents carry every Gladys language', async () => {
+  const empty = setup({ devices: [] });
+  assertEveryLanguage(await ACTIONS.scan(empty.gladys, { fleet: empty.fleet }), 'scan (none)');
+  assertEveryLanguage(
+    await ACTIONS.test_connection(empty.gladys, { fleet: empty.fleet }),
+    'test (none)',
+  );
+  assertEveryLanguage(
+    await WIDGETS[OVERVIEW_WIDGET].get(empty.gladys, { fleet: empty.fleet }),
+    'overview (none)',
+  );
+
+  const { network, gladys, fleet } = setup();
+  network.device('I1').insight.state = 1;
+  network.device('M1').failure = 'refuse';
+  assertEveryLanguage(await ACTIONS.scan(gladys, { fleet }), 'scan');
+  assertEveryLanguage(await ACTIONS.test_connection(gladys, { fleet }), 'test');
+  assertEveryLanguage(await WIDGETS[OVERVIEW_WIDGET].get(gladys, { fleet }), 'overview');
+  const settings = { device: idsOf(gladys, 'I1').device };
+  assertEveryLanguage(await WIDGETS[INSIGHT_WIDGET].get(gladys, { fleet, settings }), 'insight');
+  assertEveryLanguage(
+    await WIDGETS[INSIGHT_WIDGET].get(gladys, { fleet, settings: {} }),
+    'insight (none)',
+  );
+});
+
+test('the language helpers fill every language and fall back on English', () => {
+  assert.deepEqual(untranslated('Kitchen'), {
+    en: 'Kitchen',
+    fr: 'Kitchen',
+    de: 'Kitchen',
+    es: 'Kitchen',
+  });
+  assert.deepEqual(
+    eachLanguage((lang) => lang.toUpperCase()),
+    { en: 'EN', fr: 'FR', de: 'DE', es: 'ES' },
+  );
+  assert.deepEqual(lines([{ en: 'a', fr: 'b' }, untranslated('c')]), {
+    en: 'a\nc',
+    fr: 'b\nc',
+    de: 'a\nc',
+    es: 'a\nc',
+  });
 });

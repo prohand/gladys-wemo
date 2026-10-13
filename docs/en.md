@@ -22,10 +22,10 @@ HomeKit only (Thread), do not speak the local Wemo protocol.
 ## Installation
 
 1. Install the **Wemo** integration from the Gladys catalog (Gladys 5.1 or
-   later). The install screen says it asks for an **SSDP network search**:
-   that is how Gladys finds the Wemo devices for it.
-2. Open the **Discovery** tab of the integration: the Wemo devices of your
-   network show up. Add the ones you want.
+   later). The install screen lists an **SSDP search** under **Network
+   discovery requests**: that is how Gladys finds the Wemo devices for it.
+2. Open the **Discover** tab of the integration: the Wemo devices of your
+   network show up. Click **Add to Gladys** on the ones you want.
 3. That's it: their state shows in Gladys and you can control them.
 
 The Wemo devices must already be on your Wi-Fi (set up earlier with the Wemo
@@ -50,7 +50,9 @@ app, or put back on Wi-Fi with a tool such as `pywemo`).
 A Wemo often changes **port** after a reboot: the integration finds it again
 on its other ports by itself, checking its serial number.
 
-## Configuration screen buttons
+## Configuration tab buttons
+
+In the **Actions** card of the **Configuration** tab:
 
 - **Search for Wemo devices** — runs the search and lists what was found (and
   what was not: a silent address, an unsupported device).
@@ -59,9 +61,9 @@ on its other ports by itself, checking its serial number.
 
 ## Local / unreachable badge
 
-Each device shows a badge: **local** when it answers, **unreachable** after
-three reads without an answer. The Configuration screen says "No Wemo answers"
-when none answers any more.
+Each device shows a badge in the **Devices** tab: **Local** when it answers,
+**Unreachable** after three reads without an answer. The **Supervision** tab
+says "No Wemo answers" when none answers any more.
 
 ## Scenes
 
@@ -107,5 +109,5 @@ For a plain on/off, use the standard Gladys "Device state change" trigger.
   by hand still work.
 - **A Wemo turns unreachable now and then**: its Wi-Fi is weak, or it changed
   address. Reserve it a fixed IP address in your router.
-- **Logs**: from the Gladys interface (or `docker logs`), with
+- **Logs**: in the **Logs** tab of the integration (or `docker logs`), with
   `LOG_LEVEL=debug` for the detail of every read.

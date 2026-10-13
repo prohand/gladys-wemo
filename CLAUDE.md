@@ -49,7 +49,7 @@ src/wemo/states.js        deduplicated state publication (deadband for the power
 src/wemo/fleet.js         known Wemo, polling loop, commands, offline detection, scene triggers
 src/devices/index.js      Gladys device per family: features, params, external ids
 src/capabilities/         Configuration screen actions, scene actions, widgets, shared texts
-docs/en.md, docs/fr.md    user documentation, re-hosted by Gladys (mandatory, kept in sync)
+docs/{en,fr,de,es}.md     user documentation, re-hosted by Gladys (en/fr mandatory, kept in sync)
 test/                     node --test; helpers fake Gladys, a Wemo LAN (fetch) and the clock
 .github/scripts/changelog-release.mjs   rolls [Unreleased] at release time (tested)
 ```
@@ -85,8 +85,9 @@ test/                     node --test; helpers fake Gladys, a Wemo LAN (fetch) a
 
 `test/manifest.test.js` ties `gladys-assistant-integration.json` to the code: actions, scene
 actions, widgets and triggers declared ⇔ handled/fired, defaults ⇔ `DEFAULT_CONFIG`, SSDP target,
-`transports`, bilingual texts, description length, version ⇔ `package.json` ⇔ `docker_image`.
-Change both sides together. Texts are `{ "en": ..., "fr": ... }` objects, never plain strings.
+`transports`, texts in every language, description length, version ⇔ `package.json` ⇔
+`docker_image`. Change both sides together. Texts are `{ "en": ..., "fr": ..., "de": ..., "es": ... }` objects,
+never plain strings (`LANGUAGES` in `src/capabilities/labels.js`).
 
 ## Rules
 
@@ -96,7 +97,8 @@ Change both sides together. Texts are `{ "en": ..., "fr": ... }` objects, never 
 - **Changelog.** Every user-visible change adds a line under `## [Unreleased]` in
   `CHANGELOG.md` (`### Added`, `Changed`, `Fixed`, `Removed`, `Security`). Never write a version
   heading: the Release workflow does.
-- **User-facing text** is bilingual (English and French): action messages, widget texts,
-  manifest, `docs/en.md` / `docs/fr.md`.
+- **User-facing text** is `{ en, fr, de, es }` (English, French, German, Spanish): action
+  messages, widget texts, manifest; `docs/en.md`, `docs/fr.md`, `docs/de.md`, `docs/es.md` stay
+  in sync.
 - **Style.** Prettier formats, ESLint catches mistakes. Comments explain why, in English. Tests
   never touch the network (`test/helpers/fakeWemo.js` serves a fake LAN through `fetch`).

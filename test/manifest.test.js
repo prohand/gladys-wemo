@@ -13,6 +13,7 @@ import { SCENE_ACTIONS } from '../src/capabilities/scenes.js';
 import { WIDGETS } from '../src/capabilities/widgets.js';
 import { SSDP_SEARCH_TARGET } from '../src/wemo/discovery.js';
 import { SCENE_TRIGGERS } from '../src/wemo/fleet.js';
+import { LANGUAGES } from '../src/capabilities/labels.js';
 
 const manifest = JSON.parse(
   await readFile(new URL('../gladys-assistant-integration.json', import.meta.url), 'utf8'),
@@ -129,7 +130,7 @@ test('dynamic selects declare the devices source and no static options', () => {
   }
 });
 
-test('every text is bilingual: label, description, placeholder, options', () => {
+test('every text carries every Gladys language: label, description, placeholder, options', () => {
   const texts = [manifest.description];
   const visit = (item) => {
     for (const key of ['label', 'description', 'placeholder']) {
@@ -159,7 +160,22 @@ test('every text is bilingual: label, description, placeholder, options', () => 
   }
   for (const text of texts) {
     assert.equal(typeof text, 'object', JSON.stringify(text));
-    assert.ok(text.en && text.fr, `missing a language in ${JSON.stringify(text)}`);
+    assert.deepEqual(Object.keys(text), LANGUAGES, `languages of ${JSON.stringify(text)}`);
+    for (const lang of LANGUAGES) {
+      assert.ok(text[lang], `empty ${lang} in ${JSON.stringify(text)}`);
+    }
+  }
+});
+
+test('the code offers the four languages of the Gladys interface', () => {
+  assert.deepEqual(LANGUAGES, ['en', 'fr', 'de', 'es']);
+});
+
+test('section texts hold 1000 characters at most per language', () => {
+  for (const section of manifest.config_schema.filter((field) => field.type === 'section')) {
+    for (const lang of LANGUAGES) {
+      assert.ok(section.description[lang].length <= 1000, `${section.key}.${lang}`);
+    }
   }
 });
 
@@ -169,6 +185,7 @@ test('the version is the package version, and the image is tagged with it', () =
 });
 
 test('the catalog description holds 10 to 100 characters per language', () => {
+  assert.deepEqual(Object.keys(manifest.description), LANGUAGES);
   for (const [lang, text] of Object.entries(manifest.description)) {
     assert.ok(text.length >= 10 && text.length <= 100, `description.${lang}: ${text.length}`);
   }
@@ -176,7 +193,7 @@ test('the catalog description holds 10 to 100 characters per language', () => {
 
 test('widget labels hold 3 to 30 characters and descriptions 100 at most', () => {
   for (const widget of manifest.widgets) {
-    for (const lang of ['en', 'fr']) {
+    for (const lang of LANGUAGES) {
       assert.ok(widget.label[lang].length >= 3 && widget.label[lang].length <= 30);
       assert.ok(widget.description[lang].length <= 100);
     }
