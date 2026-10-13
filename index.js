@@ -37,6 +37,8 @@ async function reportConnectionStatus() {
         ? {
             en: 'No Wemo answers on the local network.',
             fr: 'Aucun Wemo ne répond sur le réseau local.',
+            de: 'Kein Wemo antwortet im lokalen Netzwerk.',
+            es: 'Ningún Wemo responde en la red local.',
           }
         : undefined,
     )
@@ -125,6 +127,8 @@ gladys.on('connected', async () => {
       .setConnectionStatus(false, {
         en: 'Initialization failed, check the integration logs.',
         fr: "L'initialisation a échoué, consultez les logs de l'intégration.",
+        de: 'Die Initialisierung ist fehlgeschlagen, prüfen Sie die Protokolle der Integration.',
+        es: 'La inicialización ha fallado, consulte los registros de la integración.',
       })
       .catch(() => {});
   }
