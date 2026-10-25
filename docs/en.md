@@ -21,7 +21,7 @@ HomeKit only (Thread), do not speak the local Wemo protocol.
 
 ## Installation
 
-1. Install the **Wemo** integration from the Gladys catalog (Gladys 5.1 or
+1. Install the **Wemo** integration from the Gladys catalog (Gladys 5.3 or
    later). The install screen lists an **SSDP search** under **Network
    discovery requests**: that is how Gladys finds the Wemo devices for it.
 2. Open the **Discover** tab of the integration: the Wemo devices of your

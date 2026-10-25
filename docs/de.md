@@ -23,7 +23,7 @@ Wemo-Protokoll nicht.
 
 ## Installation
 
-1. Installiere die Integration **Wemo** aus dem Gladys-Katalog (Gladys 5.1
+1. Installiere die Integration **Wemo** aus dem Gladys-Katalog (Gladys 5.3
    oder neuer). Der Installationsbildschirm zeigt, dass sie eine
    **SSDP-Netzwerksuche** anfordert: So findet Gladys die Wemo-Geräte für sie.
 2. Öffne den Tab **Entdecken** der Integration: Die Wemo-Geräte deines

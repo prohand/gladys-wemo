@@ -22,7 +22,7 @@ protocole Wemo local.
 
 ## Installation
 
-1. Installez l'intégration **Wemo** depuis le catalogue de Gladys (Gladys 5.1
+1. Installez l'intégration **Wemo** depuis le catalogue de Gladys (Gladys 5.3
    ou plus récent). L'écran d'installation indique qu'elle demande une
    **recherche réseau SSDP** : c'est ainsi que Gladys trouve les Wemo pour elle.
 2. Ouvrez l'onglet **Découverte** de l'intégration : les Wemo de votre réseau

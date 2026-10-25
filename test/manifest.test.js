@@ -79,12 +79,65 @@ test('every scene trigger the fleet fires is declared, and vice versa', () => {
 });
 
 test('the capability fields and the categories fit the gladys_version range', () => {
-  assert.ok(manifest.categories.length >= 1 && manifest.categories.length <= 3);
+  assert.equal(manifest.gladys_version, '>=5.3.0');
   assert.ok(isAtLeast(minGladysVersion(), [4, 86, 0]), 'categories need Gladys >= 4.86.0');
   assert.ok(
     isAtLeast(minGladysVersion(), [5, 1, 0]),
     'scene_triggers, scene_actions and widgets need Gladys >= 5.1.0',
   );
+  if (manifest.keywords || manifest.countries || manifest.music) {
+    assert.ok(
+      isAtLeast(minGladysVersion(), [5, 3, 0]),
+      'keywords, countries and music need Gladys >= 5.3.0',
+    );
+  }
+});
+
+// The store's catalog shelves (Gladys 5.3 added the last four). An unknown key is
+// only dropped with a warning, so a typo would silently cost the shelf.
+const CATEGORIES = [
+  'climate',
+  'lighting',
+  'energy',
+  'security',
+  'multimedia',
+  'appliances',
+  'environment',
+  'protocols',
+  'network',
+  'notifications',
+  'assistants',
+  'services',
+  'transport',
+  'vehicles',
+  'servers',
+  'leisure',
+];
+
+test('categories: one to three shelves of the store vocabulary', () => {
+  assert.ok(manifest.categories.length >= 1 && manifest.categories.length <= 3);
+  assert.equal(new Set(manifest.categories).size, manifest.categories.length);
+  for (const category of manifest.categories) {
+    assert.ok(CATEGORIES.includes(category), `unknown category "${category}"`);
+  }
+});
+
+test('keywords: 1 to 10 unique search terms of 2 to 30 characters', () => {
+  const { keywords } = manifest;
+  assert.ok(Array.isArray(keywords) && keywords.length >= 1 && keywords.length <= 10);
+  for (const keyword of keywords) {
+    assert.equal(typeof keyword, 'string');
+    const length = keyword.trim().length;
+    assert.ok(length >= 2 && length <= 30, `keyword "${keyword}" must be 2-30 characters`);
+  }
+  const normalized = keywords.map((keyword) => keyword.trim().toLowerCase());
+  assert.equal(new Set(normalized).size, normalized.length, 'keywords must be unique');
+});
+
+test('countries: none, a Wemo works the same everywhere', () => {
+  // A declared list hides the integration from the browse views of every other
+  // country; worldwide is the right default for a hardware brand.
+  assert.equal(manifest.countries, undefined);
 });
 
 test('the transport is local only: the Belkin cloud is gone', () => {
