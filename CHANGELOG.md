@@ -10,6 +10,18 @@ the notes of the version's GitHub Release.
 
 ## [Unreleased]
 
+### Added
+
+- Search keywords for the Gladys catalog (Wemo Mini, Insight, Maker, smart plug,
+  light switch, power meter…).
+
+### Changed
+
+- Gladys 5.3.0 or later is now required (catalog keywords).
+- Gladys integration SDK 0.16.
+- The store admission checks skip the image check on pull requests and run in
+  full at the end of the Release workflow, once the image is published.
+
 ## [1.1.1] - 2026-10-23
 
 - Maintenance release, no functional change.

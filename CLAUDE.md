@@ -87,7 +87,8 @@ test/                     node --test; helpers fake Gladys, a Wemo LAN (fetch) a
 actions, widgets and triggers declared ⇔ handled/fired, defaults ⇔ `DEFAULT_CONFIG`, SSDP target,
 `transports`, texts in every language, description length, version ⇔ `package.json` ⇔
 `docker_image`. Change both sides together. Texts are `{ "en": ..., "fr": ..., "de": ..., "es": ... }` objects,
-never plain strings (`LANGUAGES` in `src/capabilities/labels.js`).
+never plain strings (`LANGUAGES` in `src/capabilities/labels.js`). `categories` (1-3 store shelves)
+and `keywords` (1-10 search terms) are checked too; `keywords` pins `gladys_version >=5.3.0`.
 
 ## Rules
 

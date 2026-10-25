@@ -35,6 +35,8 @@ User documentation: [English](docs/en.md) · [Français](docs/fr.md) · [Deutsch
   `wemo_insight` (live power and energy, today, 24 h curve, on/off button).
 - **Configuration screen buttons**: "Search for Wemo devices", "Test the connection".
 
+Requires **Gladys 5.3.0** or later.
+
 ## Project structure
 
 ```
