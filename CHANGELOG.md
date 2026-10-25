@@ -10,6 +10,8 @@ the notes of the version's GitHub Release.
 
 ## [Unreleased]
 
+## [1.2.0] - 2026-10-25
+
 ### Added
 
 - Search keywords for the Gladys catalog (Wemo Mini, Insight, Maker, smart plug,
@@ -59,7 +61,8 @@ the notes of the version's GitHub Release.
 - Configuration screen buttons: "Search for Wemo devices" and "Test the connection".
 - `SECURITY.md`, `CHANGELOG.md` and `CLAUDE.md`; CI (format, lint, tests on Node 22 and 24, store checks, Docker build), Release, multi-arch build and GitHub Release workflows; Dependabot.
 
-[Unreleased]: https://github.com/prohand/gladys-wemo/compare/v1.1.1...HEAD
+[Unreleased]: https://github.com/prohand/gladys-wemo/compare/v1.2.0...HEAD
+[1.2.0]: https://github.com/prohand/gladys-wemo/compare/v1.1.1...v1.2.0
 [1.1.1]: https://github.com/prohand/gladys-wemo/compare/v1.1.0...v1.1.1
 [1.1.0]: https://github.com/prohand/gladys-wemo/compare/v1.0.2...v1.1.0
 [1.0.2]: https://github.com/prohand/gladys-wemo/compare/v1.0.1...v1.0.2
